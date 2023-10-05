@@ -15,14 +15,16 @@ class ApiService {
       final response = await _dio.post(notificationUrl,
           options: Options(headers: {"Authorization": firebaseApiKey}),
           data: {
-            "to": "/topics/news",
+            "to": "/topics/$topic",
             "notification": notification.headerModel.toJson(),
-            "data": notification.dataModel.toJson()
+            "data": notification.dataModel.toJson()..remove('timestamp')
           });
       if (response.statusCode == 200) {
         return Result.success(null);
       }
       return Result.fail(response.data);
+    } on DioError catch (e) {
+      return Result.fail(e.response.toString());
     } catch (e) {
       return Result.fail(e.toString());
     }

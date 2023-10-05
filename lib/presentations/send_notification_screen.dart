@@ -77,7 +77,6 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> with Fo
                     controller: headerTitleController,
                     validator: validateString,
                     onChanged: (value) {
-                      _validate();
                       context.read<NotificationCubit>().updateHeaderTitle(value);
                     },
                     decoration: InputDecoration(
@@ -89,7 +88,6 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> with Fo
                     controller: headerBodyController,
                     validator: validateString,
                     onChanged: (value) {
-                      _validate();
                       context.read<NotificationCubit>().updateHeaderBody(value);
                     },
                     decoration: InputDecoration(
@@ -101,7 +99,6 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> with Fo
                     controller: dateTitleController,
                     validator: validateString,
                     onChanged: (value) {
-                      _validate();
                       context.read<NotificationCubit>().updateDataTitle(value);
                     },
                     decoration: InputDecoration(
@@ -112,10 +109,7 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> with Fo
                   TextFormField(
                     controller: dateBodyController,
                     validator: validateString,
-                    onChanged: (value) {
-                      _validate();
-                      context.read<NotificationCubit>().updateDataBody(value);
-                    },
+                    onChanged: (value) => context.read<NotificationCubit>().updateDataBody(value),
                     decoration: InputDecoration(
                         label: const Text('Body...'),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
@@ -133,10 +127,8 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> with Fo
                               child: Text(e),
                             ))
                         .toList(),
-                    onChanged: (value) {
-                      _validate();
-                      context.read<NotificationCubit>().updateDataIconCode(value);
-                    },
+                    onChanged: (value) =>
+                        context.read<NotificationCubit>().updateDataIconCode(value),
                   ),
                 ],
               ),
